@@ -26,7 +26,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // makeWizard creates and returns a new puppeth wizard.

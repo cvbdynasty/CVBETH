@@ -27,12 +27,12 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/accounts"
-	"github.com/cvbdynasty/cvbEth/accounts/usbwallet/internal/trezor"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/accounts"
+	"github.com/cvbdynasty/CVBETH/accounts/usbwallet/internal/trezor"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/log"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -221,7 +221,7 @@ func (w *trezorDriver) trezorSign(derivationPath []uint32, tx *types.Transaction
 		signer = new(types.HomesteadSigner)
 	} else {
 		signer = types.NewEIP155Signer(chainID)
-		signature[64] = signature[64] - byte(chainID.Uint64()*2+35)
+		signature[64] -= byte(chainID.Uint64()*2 + 35)
 	}
 	// Inject the final signature into the transaction and sanity check the sender
 	signed, err := tx.WithSignature(signer, signature)

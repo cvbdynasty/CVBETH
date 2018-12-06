@@ -22,7 +22,7 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
 	"gopkg.in/urfave/cli.v1"
 )
 

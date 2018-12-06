@@ -1,5 +1,5 @@
 language: go
-go_import_path: github.com/cvbdynasty/cvbEth
+go_import_path: github.com/cvbdynasty/CVBETH
 sudo: false
 matrix:
   include:

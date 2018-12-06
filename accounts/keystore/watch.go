@@ -21,7 +21,7 @@ package keystore
 import (
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 	"github.com/rjeczalik/notify"
 )
 

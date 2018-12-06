@@ -21,12 +21,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/state"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/ethdb"
-	"github.com/cvbdynasty/cvbEth/trie"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/state"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/ethdb"
+	"github.com/cvbdynasty/CVBETH/trie"
 )
 
 func NewState(ctx context.Context, head *types.Header, odr OdrBackend) *state.StateDB {
@@ -108,7 +108,7 @@ func (t *odrTrie) TryGet(key []byte) ([]byte, error) {
 func (t *odrTrie) TryUpdate(key, value []byte) error {
 	key = crypto.Keccak256(key)
 	return t.do(key, func() error {
-		return t.trie.TryDelete(key)
+		return t.trie.TryUpdate(key, value)
 	})
 }
 

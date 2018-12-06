@@ -5,7 +5,7 @@ package whisperv6
 import (
 	"encoding/json"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
 )
 
 var _ = (*messageOverride)(nil)

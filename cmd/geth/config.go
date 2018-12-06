@@ -27,12 +27,12 @@ import (
 
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/dashboard"
-	"github.com/cvbdynasty/cvbEth/eth"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/params"
-	whisper "github.com/cvbdynasty/cvbEth/whisper/whisperv6"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/dashboard"
+	"github.com/cvbdynasty/CVBETH/eth"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/params"
+	whisper "github.com/cvbdynasty/CVBETH/whisper/whisperv6"
 	"github.com/naoina/toml"
 )
 
@@ -167,6 +167,9 @@ func makeFullNode(ctx *cli.Context) *node.Node {
 		}
 		if ctx.GlobalIsSet(utils.WhisperMinPOWFlag.Name) {
 			cfg.Shh.MinimumAcceptedPOW = ctx.Float64(utils.WhisperMinPOWFlag.Name)
+		}
+		if ctx.GlobalIsSet(utils.WhisperRestrictConnectionBetweenLightClientsFlag.Name) {
+			cfg.Shh.RestrictConnectionBetweenLightClients = true
 		}
 		utils.RegisterShhService(stack, &cfg.Shh)
 	}

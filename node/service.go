@@ -19,11 +19,11 @@ package node
 import (
 	"reflect"
 
-	"github.com/cvbdynasty/cvbEth/accounts"
-	"github.com/cvbdynasty/cvbEth/ethdb"
-	"github.com/cvbdynasty/cvbEth/event"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/accounts"
+	"github.com/cvbdynasty/CVBETH/ethdb"
+	"github.com/cvbdynasty/CVBETH/event"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 // ServiceContext is a collection of service independent options inherited from
@@ -41,9 +41,9 @@ type ServiceContext struct {
 // node is an ephemeral one, a memory database is returned.
 func (ctx *ServiceContext) OpenDatabase(name string, cache int, handles int) (ethdb.Database, error) {
 	if ctx.config.DataDir == "" {
-		return ethdb.NewMemDatabase()
+		return ethdb.NewMemDatabase(), nil
 	}
-	db, err := ethdb.NewLDBDatabase(ctx.config.resolvePath(name), cache, handles)
+	db, err := ethdb.NewLDBDatabase(ctx.config.ResolvePath(name), cache, handles)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (ctx *ServiceContext) OpenDatabase(name string, cache int, handles int) (et
 // and if the user actually uses persistent storage. It will return an empty string
 // for emphemeral storage and the user's own input for absolute paths.
 func (ctx *ServiceContext) ResolvePath(path string) string {
-	return ctx.config.resolvePath(path)
+	return ctx.config.ResolvePath(path)
 }
 
 // Service retrieves a currently running service registered of a specific type.

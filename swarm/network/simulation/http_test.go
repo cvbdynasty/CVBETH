@@ -24,9 +24,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
 )
 
 func TestSimulationWithHTTPServer(t *testing.T) {

@@ -54,7 +54,7 @@ func TestBloom(t *testing.T) {
 import (
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/core/state"
+	"github.com/cvbdynasty/CVBETH/core/state"
 )
 
 func TestBloom9(t *testing.T) {

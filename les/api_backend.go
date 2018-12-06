@@ -20,21 +20,22 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/accounts"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/math"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/core/bloombits"
-	"github.com/cvbdynasty/cvbEth/core/state"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/core/vm"
-	"github.com/cvbdynasty/cvbEth/eth/downloader"
-	"github.com/cvbdynasty/cvbEth/eth/gasprice"
-	"github.com/cvbdynasty/cvbEth/ethdb"
-	"github.com/cvbdynasty/cvbEth/event"
-	"github.com/cvbdynasty/cvbEth/light"
-	"github.com/cvbdynasty/cvbEth/params"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/accounts"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/math"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/core/bloombits"
+	"github.com/cvbdynasty/CVBETH/core/rawdb"
+	"github.com/cvbdynasty/CVBETH/core/state"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/core/vm"
+	"github.com/cvbdynasty/CVBETH/eth/downloader"
+	"github.com/cvbdynasty/CVBETH/eth/gasprice"
+	"github.com/cvbdynasty/CVBETH/ethdb"
+	"github.com/cvbdynasty/CVBETH/event"
+	"github.com/cvbdynasty/CVBETH/light"
+	"github.com/cvbdynasty/CVBETH/params"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 type LesApiBackend struct {
@@ -59,8 +60,11 @@ func (b *LesApiBackend) HeaderByNumber(ctx context.Context, blockNr rpc.BlockNum
 	if blockNr == rpc.LatestBlockNumber || blockNr == rpc.PendingBlockNumber {
 		return b.eth.blockchain.CurrentHeader(), nil
 	}
-
 	return b.eth.blockchain.GetHeaderByNumberOdr(ctx, uint64(blockNr))
+}
+
+func (b *LesApiBackend) HeaderByHash(ctx context.Context, hash common.Hash) (*types.Header, error) {
+	return b.eth.blockchain.GetHeaderByHash(hash), nil
 }
 
 func (b *LesApiBackend) BlockByNumber(ctx context.Context, blockNr rpc.BlockNumber) (*types.Block, error) {
@@ -83,16 +87,22 @@ func (b *LesApiBackend) GetBlock(ctx context.Context, blockHash common.Hash) (*t
 	return b.eth.blockchain.GetBlockByHash(ctx, blockHash)
 }
 
-func (b *LesApiBackend) GetReceipts(ctx context.Context, blockHash common.Hash) (types.Receipts, error) {
-	return light.GetBlockReceipts(ctx, b.eth.odr, blockHash, core.GetBlockNumber(b.eth.chainDb, blockHash))
+func (b *LesApiBackend) GetReceipts(ctx context.Context, hash common.Hash) (types.Receipts, error) {
+	if number := rawdb.ReadHeaderNumber(b.eth.chainDb, hash); number != nil {
+		return light.GetBlockReceipts(ctx, b.eth.odr, hash, *number)
+	}
+	return nil, nil
 }
 
-func (b *LesApiBackend) GetLogs(ctx context.Context, blockHash common.Hash) ([][]*types.Log, error) {
-	return light.GetBlockLogs(ctx, b.eth.odr, blockHash, core.GetBlockNumber(b.eth.chainDb, blockHash))
+func (b *LesApiBackend) GetLogs(ctx context.Context, hash common.Hash) ([][]*types.Log, error) {
+	if number := rawdb.ReadHeaderNumber(b.eth.chainDb, hash); number != nil {
+		return light.GetBlockLogs(ctx, b.eth.odr, hash, *number)
+	}
+	return nil, nil
 }
 
-func (b *LesApiBackend) GetTd(blockHash common.Hash) *big.Int {
-	return b.eth.blockchain.GetTdByHash(blockHash)
+func (b *LesApiBackend) GetTd(hash common.Hash) *big.Int {
+	return b.eth.blockchain.GetTdByHash(hash)
 }
 
 func (b *LesApiBackend) GetEVM(ctx context.Context, msg core.Message, state *state.StateDB, header *types.Header, vmCfg vm.Config) (*vm.EVM, func() error, error) {
@@ -129,8 +139,8 @@ func (b *LesApiBackend) TxPoolContent() (map[common.Address]types.Transactions, 
 	return b.eth.txPool.Content()
 }
 
-func (b *LesApiBackend) SubscribeTxPreEvent(ch chan<- core.TxPreEvent) event.Subscription {
-	return b.eth.txPool.SubscribeTxPreEvent(ch)
+func (b *LesApiBackend) SubscribeNewTxsEvent(ch chan<- core.NewTxsEvent) event.Subscription {
+	return b.eth.txPool.SubscribeNewTxsEvent(ch)
 }
 
 func (b *LesApiBackend) SubscribeChainEvent(ch chan<- core.ChainEvent) event.Subscription {
@@ -182,7 +192,7 @@ func (b *LesApiBackend) BloomStatus() (uint64, uint64) {
 		return 0, 0
 	}
 	sections, _, _ := b.eth.bloomIndexer.Sections()
-	return light.BloomTrieFrequency, sections
+	return params.BloomBitsBlocksClient, sections
 }
 
 func (b *LesApiBackend) ServiceFilter(ctx context.Context, session *bloombits.MatcherSession) {

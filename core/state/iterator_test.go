@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/ethdb"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/ethdb"
 )
 
 // Tests that the node iterator indeed walks over the entire database contents.

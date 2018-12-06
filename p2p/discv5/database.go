@@ -28,9 +28,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/rlp"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/iterator"

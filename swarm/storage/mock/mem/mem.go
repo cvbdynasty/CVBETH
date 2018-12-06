@@ -27,8 +27,8 @@ import (
 	"io/ioutil"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock"
 )
 
 // GlobalStore stores all chunk data and also keys and node addresses relations.
@@ -80,6 +80,22 @@ func (s *GlobalStore) Put(addr common.Address, key []byte, data []byte) error {
 	}
 	s.nodes[string(key)][addr] = struct{}{}
 	s.data[string(key)] = data
+	return nil
+}
+
+// Delete removes the chunk data for node with address addr.
+func (s *GlobalStore) Delete(addr common.Address, key []byte) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	var count int
+	if _, ok := s.nodes[string(key)]; ok {
+		delete(s.nodes[string(key)], addr)
+		count = len(s.nodes[string(key)])
+	}
+	if count == 0 {
+		delete(s.data, string(key))
+	}
 	return nil
 }
 

@@ -19,7 +19,7 @@ package trie
 import (
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // MissingNodeError is returned by the trie functions (TryGet, TryUpdate, TryDelete)

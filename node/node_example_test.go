@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 // SampleService is a trivial network service that can be attached to a node for

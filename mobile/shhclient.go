@@ -19,8 +19,8 @@
 package geth
 
 import (
-	"github.com/cvbdynasty/cvbEth/whisper/shhclient"
-	whisper "github.com/cvbdynasty/cvbEth/whisper/whisperv6"
+	"github.com/cvbdynasty/CVBETH/whisper/shhclient"
+	whisper "github.com/cvbdynasty/CVBETH/whisper/whisperv6"
 )
 
 // WhisperClient provides access to the Ethereum APIs.

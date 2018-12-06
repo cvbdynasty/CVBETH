@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 )
 
 const (

@@ -22,8 +22,9 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/nat"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/nat"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 const (
@@ -39,6 +40,7 @@ var DefaultConfig = Config{
 	HTTPPort:         DefaultHTTPPort,
 	HTTPModules:      []string{"net", "web3"},
 	HTTPVirtualHosts: []string{"localhost"},
+	HTTPTimeouts:     rpc.DefaultHTTPTimeouts,
 	WSPort:           DefaultWSPort,
 	WSModules:        []string{"net", "web3"},
 	P2P: p2p.Config{

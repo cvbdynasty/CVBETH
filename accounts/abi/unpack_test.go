@@ -26,7 +26,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 	"github.com/stretchr/testify/require"
 )
 
@@ -116,6 +116,11 @@ var unpackTests = []unpackTest{
 		def:  `[{"type": "int17"}]`,
 		enc:  "0000000000000000000000000000000000000000000000000000000000000001",
 		want: big.NewInt(1),
+	},
+	{
+		def:  `[{"type": "int256"}]`,
+		enc:  "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+		want: big.NewInt(-1),
 	},
 	{
 		def:  `[{"type": "address"}]`,

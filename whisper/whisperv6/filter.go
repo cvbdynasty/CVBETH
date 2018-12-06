@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // Filter represents a Whisper message filter
@@ -248,23 +248,6 @@ func (f *Filter) MatchMessage(msg *ReceivedMessage) bool {
 // Topics are not checked here, since this is done by topic matchers.
 func (f *Filter) MatchEnvelope(envelope *Envelope) bool {
 	return f.PoW <= 0 || envelope.pow >= f.PoW
-}
-
-func matchSingleTopic(topic TopicType, bt []byte) bool {
-	if len(bt) > TopicLength {
-		bt = bt[:TopicLength]
-	}
-
-	if len(bt) < TopicLength {
-		return false
-	}
-
-	for j, b := range bt {
-		if topic[j] != b {
-			return false
-		}
-	}
-	return true
 }
 
 // IsPubKeyEqual checks that two public keys are equal

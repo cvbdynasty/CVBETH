@@ -34,8 +34,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 type allocItem struct{ Addr, Balance *big.Int }

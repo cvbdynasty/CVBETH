@@ -24,8 +24,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/p2p"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/p2p"
 )
 
 // Tests that datadirs can be successfully created, be them manually configured

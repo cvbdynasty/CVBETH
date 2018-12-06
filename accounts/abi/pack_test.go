@@ -24,7 +24,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 func TestPack(t *testing.T) {

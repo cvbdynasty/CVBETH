@@ -28,11 +28,11 @@
 //  	"context"
 //  	"fmt"
 //  	"os"
-//  	pss "github.com/cvbdynasty/cvbEth/swarm/pss/client"
-//  	"github.com/cvbdynasty/cvbEth/p2p/protocols"
-//  	"github.com/cvbdynasty/cvbEth/p2p"
-//  	"github.com/cvbdynasty/cvbEth/swarm/pot"
-//  	"github.com/cvbdynasty/cvbEth/swarm/log"
+//  	pss "github.com/cvbdynasty/CVBETH/swarm/pss/client"
+//  	"github.com/cvbdynasty/CVBETH/p2p/protocols"
+//  	"github.com/cvbdynasty/CVBETH/p2p"
+//  	"github.com/cvbdynasty/CVBETH/swarm/pot"
+//  	"github.com/cvbdynasty/CVBETH/swarm/log"
 //  )
 //
 //  type FooMsg struct {

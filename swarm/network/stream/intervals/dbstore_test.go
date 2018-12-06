@@ -21,7 +21,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/swarm/state"
+	"github.com/cvbdynasty/CVBETH/swarm/state"
 )
 
 // TestDBStore tests basic functionality of DBStore.

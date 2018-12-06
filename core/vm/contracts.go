@@ -21,11 +21,11 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/math"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/crypto/bn256"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/math"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/crypto/bn256"
+	"github.com/cvbdynasty/CVBETH/params"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -116,7 +116,7 @@ func (c *sha256hash) Run(input []byte) ([]byte, error) {
 	return h[:], nil
 }
 
-// RIPMED160 implemented as a native contract.
+// RIPEMD160 implemented as a native contract.
 type ripemd160hash struct{}
 
 // RequiredGas returns the gas required to execute the pre-compiled contract.

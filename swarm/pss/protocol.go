@@ -24,10 +24,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/protocols"
-	"github.com/cvbdynasty/cvbEth/rlp"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/protocols"
+	"github.com/cvbdynasty/CVBETH/rlp"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 )
 
 const (

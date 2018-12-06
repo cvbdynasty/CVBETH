@@ -20,14 +20,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/eth"
-	"github.com/cvbdynasty/cvbEth/ethdb"
-	"github.com/cvbdynasty/cvbEth/light"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/eth"
+	"github.com/cvbdynasty/CVBETH/ethdb"
+	"github.com/cvbdynasty/CVBETH/light"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/params"
 )
 
 // lesCommons contains fields needed by both server and client.
@@ -63,7 +63,7 @@ func (c *lesCommons) makeProtocols(versions []uint) []p2p.Protocol {
 			Run: func(p *p2p.Peer, rw p2p.MsgReadWriter) error {
 				return c.protocolManager.runPeer(version, p, rw)
 			},
-			PeerInfo: func(id discover.NodeID) interface{} {
+			PeerInfo: func(id enode.ID) interface{} {
 				if p := c.protocolManager.peers.Peer(fmt.Sprintf("%x", id[:8])); p != nil {
 					return p.Info()
 				}

@@ -24,12 +24,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind"
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind/backends"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/contracts/chequebook/contract"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind/backends"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/contracts/chequebook/contract"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/crypto"
 )
 
 var (
@@ -46,7 +46,7 @@ func newTestBackend() *backends.SimulatedBackend {
 		addr0: {Balance: big.NewInt(1000000000)},
 		addr1: {Balance: big.NewInt(1000000000)},
 		addr2: {Balance: big.NewInt(1000000000)},
-	})
+	}, 10000000)
 }
 
 func deploy(prvKey *ecdsa.PrivateKey, amount *big.Int, backend *backends.SimulatedBackend) (common.Address, error) {

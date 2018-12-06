@@ -20,7 +20,7 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 const Version = "1.0"

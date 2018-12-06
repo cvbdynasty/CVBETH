@@ -42,7 +42,7 @@ import (
 	"fmt"
 	"hash"
 
-	ethcrypto "github.com/cvbdynasty/cvbEth/crypto"
+	ethcrypto "github.com/cvbdynasty/CVBETH/crypto"
 )
 
 var (

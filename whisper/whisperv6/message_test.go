@@ -23,9 +23,9 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 func generateMessageParams() (*MessageParams, error) {

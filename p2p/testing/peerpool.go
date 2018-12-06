@@ -20,48 +20,48 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
 )
 
 type TestPeer interface {
-	ID() discover.NodeID
+	ID() enode.ID
 	Drop(error)
 }
 
 // TestPeerPool is an example peerPool to demonstrate registration of peer connections
 type TestPeerPool struct {
 	lock  sync.Mutex
-	peers map[discover.NodeID]TestPeer
+	peers map[enode.ID]TestPeer
 }
 
 func NewTestPeerPool() *TestPeerPool {
-	return &TestPeerPool{peers: make(map[discover.NodeID]TestPeer)}
+	return &TestPeerPool{peers: make(map[enode.ID]TestPeer)}
 }
 
-func (self *TestPeerPool) Add(p TestPeer) {
-	self.lock.Lock()
-	defer self.lock.Unlock()
-	log.Trace(fmt.Sprintf("pp add peer  %v", p.ID()))
-	self.peers[p.ID()] = p
+func (p *TestPeerPool) Add(peer TestPeer) {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	log.Trace(fmt.Sprintf("pp add peer  %v", peer.ID()))
+	p.peers[peer.ID()] = peer
 
 }
 
-func (self *TestPeerPool) Remove(p TestPeer) {
-	self.lock.Lock()
-	defer self.lock.Unlock()
-	delete(self.peers, p.ID())
+func (p *TestPeerPool) Remove(peer TestPeer) {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	delete(p.peers, peer.ID())
 }
 
-func (self *TestPeerPool) Has(id discover.NodeID) bool {
-	self.lock.Lock()
-	defer self.lock.Unlock()
-	_, ok := self.peers[id]
+func (p *TestPeerPool) Has(id enode.ID) bool {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	_, ok := p.peers[id]
 	return ok
 }
 
-func (self *TestPeerPool) Get(id discover.NodeID) TestPeer {
-	self.lock.Lock()
-	defer self.lock.Unlock()
-	return self.peers[id]
+func (p *TestPeerPool) Get(id enode.ID) TestPeer {
+	p.lock.Lock()
+	defer p.lock.Unlock()
+	return p.peers[id]
 }

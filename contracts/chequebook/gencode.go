@@ -25,11 +25,11 @@ import (
 	"io/ioutil"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind"
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind/backends"
-	"github.com/cvbdynasty/cvbEth/contracts/chequebook/contract"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind/backends"
+	"github.com/cvbdynasty/CVBETH/contracts/chequebook/contract"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/crypto"
 )
 
 var (
@@ -40,7 +40,7 @@ var (
 )
 
 func main() {
-	backend := backends.NewSimulatedBackend(testAlloc)
+	backend := backends.NewSimulatedBackend(testAlloc, uint64(100000000))
 	auth := bind.NewKeyedTransactor(testKey)
 
 	// Deploy the contract, get the code.

@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.

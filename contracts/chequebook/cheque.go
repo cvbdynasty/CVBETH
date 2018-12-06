@@ -36,14 +36,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/contracts/chequebook/contract"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/swarm/services/swap/swap"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/contracts/chequebook/contract"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/swarm/services/swap/swap"
 )
 
 // TODO(zelig): watch peer solvency and notify of bouncing cheques

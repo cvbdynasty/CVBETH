@@ -20,17 +20,17 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 )
 
 /*
 http roundtripper to register for bzz url scheme
-see https://github.com/cvbdynasty/cvbEth/issues/2040
+see https://github.com/cvbdynasty/CVBETH/issues/2040
 Usage:
 
 import (
- "github.com/cvbdynasty/cvbEth/common/httpclient"
- "github.com/cvbdynasty/cvbEth/swarm/api/http"
+ "github.com/cvbdynasty/CVBETH/common/httpclient"
+ "github.com/cvbdynasty/CVBETH/swarm/api/http"
 )
 client := httpclient.New()
 // for (private) swarm proxy running locally

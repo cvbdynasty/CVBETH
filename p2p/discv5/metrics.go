@@ -1,6 +1,6 @@
 package discv5
 
-import "github.com/cvbdynasty/cvbEth/metrics"
+import "github.com/cvbdynasty/CVBETH/metrics"
 
 var (
 	ingressTrafficMeter = metrics.NewRegisteredMeter("discv5/InboundTraffic", nil)

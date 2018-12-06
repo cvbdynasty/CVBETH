@@ -21,8 +21,8 @@ package geth
 import (
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/ethclient"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/ethclient"
 )
 
 // EthereumClient provides access to the Ethereum APIs.
@@ -138,7 +138,9 @@ func (ec *EthereumClient) SubscribeNewHead(ctx *Context, handler NewHeadHandler,
 				handler.OnNewHead(&Header{header})
 
 			case err := <-rawSub.Err():
-				handler.OnError(err.Error())
+				if err != nil {
+					handler.OnError(err.Error())
+				}
 				return
 			}
 		}
@@ -227,7 +229,9 @@ func (ec *EthereumClient) SubscribeFilterLogs(ctx *Context, query *FilterQuery, 
 				handler.OnFilterLogs(&Log{&log})
 
 			case err := <-rawSub.Err():
-				handler.OnError(err.Error())
+				if err != nil {
+					handler.OnError(err.Error())
+				}
 				return
 			}
 		}

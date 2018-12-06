@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/mclock"
+	"github.com/cvbdynasty/CVBETH/common/mclock"
 )
 
 const rcConst = 1000000

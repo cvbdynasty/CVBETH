@@ -19,7 +19,7 @@ package event_test
 import (
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/event"
+	"github.com/cvbdynasty/CVBETH/event"
 )
 
 func ExampleNewSubscription() {

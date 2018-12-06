@@ -23,11 +23,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/mclock"
-	"github.com/cvbdynasty/cvbEth/common/prque"
-	"github.com/cvbdynasty/cvbEth/ethdb"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/common/mclock"
+	"github.com/cvbdynasty/CVBETH/common/prque"
+	"github.com/cvbdynasty/CVBETH/ethdb"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 // freeClientPool implements a client database that limits the connection time

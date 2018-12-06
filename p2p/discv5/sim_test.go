@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // In this test, nodes try to randomly resolve each other.

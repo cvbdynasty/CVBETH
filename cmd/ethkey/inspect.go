@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/cvbdynasty/cvbEth/accounts/keystore"
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/accounts/keystore"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/crypto"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -60,7 +60,7 @@ make sure to use this feature with great caution!`,
 		}
 
 		// Decrypt key with passphrase.
-		passphrase := getPassPhrase(ctx, false)
+		passphrase := getPassphrase(ctx)
 		key, err := keystore.DecryptKey(keyjson, passphrase)
 		if err != nil {
 			utils.Fatalf("Error decrypting key: %v", err)

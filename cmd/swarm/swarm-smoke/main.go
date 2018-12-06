@@ -20,8 +20,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	colorable "github.com/mattn/go-colorable"
+	"github.com/cvbdynasty/CVBETH/log"
 
 	cli "gopkg.in/urfave/cli.v1"
 )
@@ -34,11 +33,10 @@ var (
 	filesize         int
 	from             int
 	to               int
+	verbosity        int
 )
 
 func main() {
-	log.PrintOrigins(true)
-	log.Root().SetHandler(log.LvlFilterHandler(log.LvlTrace, log.StreamHandler(colorable.NewColorableStderr(), log.TerminalFormat(true))))
 
 	app := cli.NewApp()
 	app.Name = "smoke-test"
@@ -47,8 +45,8 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "cluster-endpoint",
-			Value:       "testing",
-			Usage:       "cluster to point to (local, open or testing)",
+			Value:       "prod",
+			Usage:       "cluster to point to (prod or a given namespace)",
 			Destination: &cluster,
 		},
 		cli.IntFlag{
@@ -80,6 +78,12 @@ func main() {
 			Usage:       "file size for generated random file in KB",
 			Destination: &filesize,
 		},
+		cli.IntFlag{
+			Name:        "verbosity",
+			Value:       1,
+			Usage:       "verbosity",
+			Destination: &verbosity,
+		},
 	}
 
 	app.Commands = []cli.Command{
@@ -88,6 +92,12 @@ func main() {
 			Aliases: []string{"c"},
 			Usage:   "upload and sync",
 			Action:  cliUploadAndSync,
+		},
+		{
+			Name:    "feed_sync",
+			Aliases: []string{"f"},
+			Usage:   "feed update generate, upload and sync",
+			Action:  cliFeedUploadAndSync,
 		},
 	}
 

@@ -22,10 +22,10 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/accounts/abi"
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/accounts/abi"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // Signer is an interaface defining the callback when a contract requires a

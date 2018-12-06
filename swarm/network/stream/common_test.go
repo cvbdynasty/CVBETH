@@ -18,7 +18,6 @@ package stream
 
 import (
 	"context"
-	crand "crypto/rand"
 	"errors"
 	"flag"
 	"fmt"
@@ -31,15 +30,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	p2ptest "github.com/cvbdynasty/cvbEth/p2p/testing"
-	"github.com/cvbdynasty/cvbEth/swarm/network"
-	"github.com/cvbdynasty/cvbEth/swarm/network/simulation"
-	"github.com/cvbdynasty/cvbEth/swarm/pot"
-	"github.com/cvbdynasty/cvbEth/swarm/state"
-	"github.com/cvbdynasty/cvbEth/swarm/storage"
-	mockdb "github.com/cvbdynasty/cvbEth/swarm/storage/mock/db"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	p2ptest "github.com/cvbdynasty/CVBETH/p2p/testing"
+	"github.com/cvbdynasty/CVBETH/swarm/network"
+	"github.com/cvbdynasty/CVBETH/swarm/network/simulation"
+	"github.com/cvbdynasty/CVBETH/swarm/pot"
+	"github.com/cvbdynasty/CVBETH/swarm/state"
+	"github.com/cvbdynasty/CVBETH/swarm/storage"
+	"github.com/cvbdynasty/CVBETH/swarm/testutil"
 	colorable "github.com/mattn/go-colorable"
 )
 
@@ -69,22 +68,7 @@ func init() {
 	log.Root().SetHandler(log.LvlFilterHandler(log.Lvl(*loglevel), log.StreamHandler(colorable.NewColorableStderr(), log.TerminalFormat(true))))
 }
 
-func createGlobalStore() (string, *mockdb.GlobalStore, error) {
-	var globalStore *mockdb.GlobalStore
-	globalStoreDir, err := ioutil.TempDir("", "global.store")
-	if err != nil {
-		log.Error("Error initiating global store temp directory!", "err", err)
-		return "", nil, err
-	}
-	globalStore, err = mockdb.NewGlobalStore(globalStoreDir)
-	if err != nil {
-		log.Error("Error initiating global store!", "err", err)
-		return "", nil, err
-	}
-	return globalStoreDir, globalStore, nil
-}
-
-func newStreamerTester(t *testing.T) (*p2ptest.ProtocolTester, *Registry, *storage.LocalStore, func(), error) {
+func newStreamerTester(t *testing.T, registryOptions *RegistryOptions) (*p2ptest.ProtocolTester, *Registry, *storage.LocalStore, func(), error) {
 	// setup
 	addr := network.RandomAddr() // tested peers peer address
 	to := network.NewKademlia(addr.OAddr, network.NewKadParams())
@@ -114,12 +98,12 @@ func newStreamerTester(t *testing.T) (*p2ptest.ProtocolTester, *Registry, *stora
 
 	delivery := NewDelivery(to, netStore)
 	netStore.NewNetFetcherFunc = network.NewFetcherFactory(delivery.RequestFromPeers, true).New
-	streamer := NewRegistry(addr, delivery, netStore, state.NewInmemoryStore(), nil)
+	streamer := NewRegistry(addr.ID(), delivery, netStore, state.NewInmemoryStore(), registryOptions, nil)
 	teardown := func() {
 		streamer.Close()
 		removeDataDir()
 	}
-	protocolTester := p2ptest.NewProtocolTester(t, network.NewNodeIDFromAddr(addr), 1, streamer.runProtocol)
+	protocolTester := p2ptest.NewProtocolTester(t, addr.ID(), 1, streamer.runProtocol)
 
 	err = waitForPeers(streamer, 1*time.Second, 1)
 	if err != nil {
@@ -230,17 +214,12 @@ func generateRandomFile() (string, error) {
 	//generate a random file size between minFileSize and maxFileSize
 	fileSize := rand.Intn(maxFileSize-minFileSize) + minFileSize
 	log.Debug(fmt.Sprintf("Generated file with filesize %d kB", fileSize))
-	b := make([]byte, fileSize*1024)
-	_, err := crand.Read(b)
-	if err != nil {
-		log.Error("Error generating random file.", "err", err)
-		return "", err
-	}
+	b := testutil.RandomBytes(1, fileSize*1024)
 	return string(b), nil
 }
 
 //create a local store for the given node
-func createTestLocalStorageForID(id discover.NodeID, addr *network.BzzAddr) (storage.ChunkStore, string, error) {
+func createTestLocalStorageForID(id enode.ID, addr *network.BzzAddr) (storage.ChunkStore, string, error) {
 	var datadir string
 	var err error
 	datadir, err = ioutil.TempDir("", fmt.Sprintf("syncer-test-%s", id.TerminalString()))

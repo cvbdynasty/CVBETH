@@ -19,7 +19,7 @@ package core
 import (
 	"runtime"
 
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // senderCacher is a concurrent transaction sender recoverer anc cacher.

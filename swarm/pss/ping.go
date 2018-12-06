@@ -23,9 +23,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/protocols"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/protocols"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 )
 
 // Generic ping protocol implementation for

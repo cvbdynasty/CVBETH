@@ -45,12 +45,12 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -180,7 +180,10 @@ func main() {
 			},
 		},
 	}
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }
 
 func showNetwork(ctx *cli.Context) error {
@@ -275,15 +278,14 @@ func createNode(ctx *cli.Context) error {
 	if len(ctx.Args()) != 0 {
 		return cli.ShowCommandHelp(ctx, ctx.Command.Name)
 	}
-	config := &adapters.NodeConfig{
-		Name: ctx.String("name"),
-	}
+	config := adapters.RandomNodeConfig()
+	config.Name = ctx.String("name")
 	if key := ctx.String("key"); key != "" {
 		privKey, err := crypto.HexToECDSA(key)
 		if err != nil {
 			return err
 		}
-		config.ID = discover.PubkeyID(&privKey.PublicKey)
+		config.ID = enode.PubkeyToIDV4(&privKey.PublicKey)
 		config.PrivateKey = privKey
 	}
 	if services := ctx.String("services"); services != "" {

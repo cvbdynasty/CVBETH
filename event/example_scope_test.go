@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/event"
+	"github.com/cvbdynasty/CVBETH/event"
 )
 
 // This example demonstrates how SubscriptionScope can be used to control the lifetime of

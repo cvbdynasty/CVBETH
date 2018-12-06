@@ -19,7 +19,7 @@ package params
 import (
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // DAOForkBlockExtra is the block header extra-data field to set for the DAO fork

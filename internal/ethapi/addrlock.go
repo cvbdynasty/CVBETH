@@ -19,7 +19,7 @@ package ethapi
 import (
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 type AddrLocker struct {

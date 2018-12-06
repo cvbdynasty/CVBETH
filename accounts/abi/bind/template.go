@@ -16,7 +16,7 @@
 
 package bind
 
-import "github.com/cvbdynasty/cvbEth/accounts/abi"
+import "github.com/cvbdynasty/CVBETH/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -63,6 +63,30 @@ const tmplSourceGo = `
 // This file is a generated binding and any manual changes will be lost.
 
 package {{.Package}}
+
+import (
+	"math/big"
+	"strings"
+
+	ethereum "github.com/cvbdynasty/CVBETH"
+	"github.com/cvbdynasty/CVBETH/accounts/abi"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/event"
+)
+
+// Reference imports to suppress errors if they are not otherwise used.
+var (
+	_ = big.NewInt
+	_ = strings.NewReader
+	_ = ethereum.NotFound
+	_ = abi.U256
+	_ = bind.Bind
+	_ = common.Big1
+	_ = types.BloomLookup
+	_ = event.NewSubscription
+)
 
 {{range $contract := .Contracts}}
 	// {{.Type}}ABI is the input ABI used to generate the binding from.

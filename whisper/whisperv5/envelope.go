@@ -26,11 +26,11 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/math"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/crypto/ecies"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/math"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/crypto/ecies"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 // Envelope represents a clear-text data packet to transmit through the Whisper

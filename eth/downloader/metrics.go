@@ -19,7 +19,7 @@
 package downloader
 
 import (
-	"github.com/cvbdynasty/cvbEth/metrics"
+	"github.com/cvbdynasty/CVBETH/metrics"
 )
 
 var (

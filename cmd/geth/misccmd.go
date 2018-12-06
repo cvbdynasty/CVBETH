@@ -23,10 +23,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/consensus/ethash"
-	"github.com/cvbdynasty/cvbEth/eth"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/consensus/ethash"
+	"github.com/cvbdynasty/CVBETH/eth"
+	"github.com/cvbdynasty/CVBETH/params"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -108,7 +108,7 @@ func makedag(ctx *cli.Context) error {
 
 func version(ctx *cli.Context) error {
 	fmt.Println(strings.Title(clientIdentifier))
-	fmt.Println("Version:", params.Version)
+	fmt.Println("Version:", params.VersionWithMeta)
 	if gitCommit != "" {
 		fmt.Println("Git Commit:", gitCommit)
 	}

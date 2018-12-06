@@ -27,7 +27,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/common/math"
+	"github.com/cvbdynasty/CVBETH/common/math"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -17,8 +17,8 @@
 package eth
 
 import (
-	"github.com/cvbdynasty/cvbEth/metrics"
-	"github.com/cvbdynasty/cvbEth/p2p"
+	"github.com/cvbdynasty/CVBETH/metrics"
+	"github.com/cvbdynasty/CVBETH/p2p"
 )
 
 var (

@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	ethereum "github.com/cvbdynasty/cvbEth"
-	"github.com/cvbdynasty/cvbEth/event"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	ethereum "github.com/cvbdynasty/CVBETH"
+	"github.com/cvbdynasty/CVBETH/event"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 // PublicDownloaderAPI provides an API which gives information about the current synchronisation status.
@@ -40,8 +40,8 @@ type PublicDownloaderAPI struct {
 // installSyncSubscription channel.
 func NewPublicDownloaderAPI(d *Downloader, m *event.TypeMux) *PublicDownloaderAPI {
 	api := &PublicDownloaderAPI{
-		d:   d,
-		mux: m,
+		d:                         d,
+		mux:                       m,
 		installSyncSubscription:   make(chan chan interface{}),
 		uninstallSyncSubscription: make(chan *uninstallSyncSubscriptionRequest),
 	}

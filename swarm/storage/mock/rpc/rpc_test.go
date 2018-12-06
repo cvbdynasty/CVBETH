@@ -19,9 +19,9 @@ package rpc
 import (
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/rpc"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock/mem"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock/test"
+	"github.com/cvbdynasty/CVBETH/rpc"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock/mem"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock/test"
 )
 
 // TestDBStore is running test for a GlobalStore
@@ -37,5 +37,5 @@ func TestRPCStore(t *testing.T) {
 	store := NewGlobalStore(rpc.DialInProc(server))
 	defer store.Close()
 
-	test.MockStore(t, store, 100)
+	test.MockStore(t, store, 30)
 }

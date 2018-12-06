@@ -21,7 +21,6 @@ package main
 
 import (
 	"crypto/ecdsa"
-	"fmt"
 	"io/ioutil"
 	"math/big"
 	"math/rand"
@@ -29,20 +28,20 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/accounts/keystore"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/fdlimit"
-	"github.com/cvbdynasty/cvbEth/consensus/ethash"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/eth"
-	"github.com/cvbdynasty/cvbEth/eth/downloader"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/accounts/keystore"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/fdlimit"
+	"github.com/cvbdynasty/CVBETH/consensus/ethash"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/eth"
+	"github.com/cvbdynasty/CVBETH/eth/downloader"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/params"
 )
 
 func main() {
@@ -62,11 +61,11 @@ func main() {
 
 	var (
 		nodes  []*node.Node
-		enodes []string
+		enodes []*enode.Node
 	)
 	for i := 0; i < 4; i++ {
 		// Start the node and wait until it's up
-		node, err := makeMiner(genesis, enodes)
+		node, err := makeMiner(genesis)
 		if err != nil {
 			panic(err)
 		}
@@ -76,18 +75,12 @@ func main() {
 			time.Sleep(250 * time.Millisecond)
 		}
 		// Connect the node to al the previous ones
-		for _, enode := range enodes {
-			enode, err := discover.ParseNode(enode)
-			if err != nil {
-				panic(err)
-			}
-			node.Server().AddPeer(enode)
+		for _, n := range enodes {
+			node.Server().AddPeer(n)
 		}
-		// Start tracking the node and it's enode url
+		// Start tracking the node and it's enode
 		nodes = append(nodes, node)
-
-		enode := fmt.Sprintf("enode://%s@127.0.0.1:%d", node.Server().NodeInfo().ID, node.Server().NodeInfo().Ports.Listener)
-		enodes = append(enodes, enode)
+		enodes = append(enodes, node.Server().Self())
 
 		// Inject the signer key and start sealing with it
 		store := node.AccountManager().Backends(keystore.KeyStoreType)[0].(*keystore.KeyStore)
@@ -155,7 +148,7 @@ func makeGenesis(faucets []*ecdsa.PrivateKey) *core.Genesis {
 	return genesis
 }
 
-func makeMiner(genesis *core.Genesis, nodes []string) (*node.Node, error) {
+func makeMiner(genesis *core.Genesis) (*node.Node, error) {
 	// Define the basic configurations for the Ethereum node
 	datadir, _ := ioutil.TempDir("", "")
 

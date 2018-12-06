@@ -20,8 +20,8 @@ import (
 	"context"
 	"net"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/p2p/netutil"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/p2p/netutil"
 )
 
 // ServeListener accepts connections on l, serving JSON-RPC on them.

@@ -19,9 +19,9 @@ package keystore
 import (
 	"math/big"
 
-	ethereum "github.com/cvbdynasty/cvbEth"
-	"github.com/cvbdynasty/cvbEth/accounts"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	ethereum "github.com/cvbdynasty/CVBETH"
+	"github.com/cvbdynasty/CVBETH/accounts"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // keystoreWallet implements the accounts.Wallet interface for the original

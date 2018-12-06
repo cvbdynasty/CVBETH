@@ -20,7 +20,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/swarm/state"
+	"github.com/cvbdynasty/CVBETH/swarm/state"
 )
 
 var ErrNotFound = errors.New("not found")

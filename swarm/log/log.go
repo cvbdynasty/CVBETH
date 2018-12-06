@@ -1,8 +1,8 @@
 package log
 
 import (
-	l "github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/metrics"
+	l "github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/metrics"
 )
 
 const (

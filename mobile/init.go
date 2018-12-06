@@ -22,7 +22,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 func init() {

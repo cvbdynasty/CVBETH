@@ -27,8 +27,8 @@ import (
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/util"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock"
 )
 
 // GlobalStore contains the LevelDB database that is storing
@@ -83,6 +83,13 @@ func (s *GlobalStore) Put(addr common.Address, key []byte, data []byte) error {
 	batch := new(leveldb.Batch)
 	batch.Put(nodeDBKey(addr, key), nil)
 	batch.Put(dataDBKey(key), data)
+	return s.db.Write(batch, nil)
+}
+
+// Delete removes the chunk reference to node with address addr.
+func (s *GlobalStore) Delete(addr common.Address, key []byte) error {
+	batch := new(leveldb.Batch)
+	batch.Delete(nodeDBKey(addr, key))
 	return s.db.Write(batch, nil)
 }
 

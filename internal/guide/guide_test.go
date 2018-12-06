@@ -30,8 +30,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/accounts/keystore"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/accounts/keystore"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // Tests that the account management snippets work correctly.

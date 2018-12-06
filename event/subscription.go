@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/mclock"
+	"github.com/cvbdynasty/CVBETH/common/mclock"
 )
 
 // Subscription represents a stream of events. The carrier of the events is typically a

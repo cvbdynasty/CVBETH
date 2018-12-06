@@ -23,7 +23,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/pipes"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/pipes"
 )
 
 func TestTCPPipe(t *testing.T) {

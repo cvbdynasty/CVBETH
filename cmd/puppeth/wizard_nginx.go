@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // ensureVirtualHost checks whether a reverse-proxy is running on the specified

@@ -20,8 +20,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // senderFromServer is a types.Signer that remembers the sender address returned by the RPC

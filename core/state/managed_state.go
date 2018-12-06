@@ -19,7 +19,7 @@ package state
 import (
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 type account struct {

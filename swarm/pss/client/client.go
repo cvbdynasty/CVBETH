@@ -25,14 +25,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/p2p/protocols"
-	"github.com/cvbdynasty/cvbEth/rlp"
-	"github.com/cvbdynasty/cvbEth/rpc"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
-	"github.com/cvbdynasty/cvbEth/swarm/pss"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/p2p/protocols"
+	"github.com/cvbdynasty/CVBETH/rlp"
+	"github.com/cvbdynasty/CVBETH/rpc"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/pss"
 )
 
 const (
@@ -236,7 +236,7 @@ func (c *Client) RunProtocol(ctx context.Context, proto *p2p.Protocol) error {
 	topichex := topicobj.String()
 	msgC := make(chan pss.APIMsg)
 	c.peerPool[topicobj] = make(map[string]*pssRPCRW)
-	sub, err := c.rpc.Subscribe(ctx, "pss", msgC, "receive", topichex)
+	sub, err := c.rpc.Subscribe(ctx, "pss", msgC, "receive", topichex, false, false)
 	if err != nil {
 		return fmt.Errorf("pss event subscription failed: %v", err)
 	}
@@ -283,8 +283,7 @@ func (c *Client) RunProtocol(ctx context.Context, proto *p2p.Protocol) error {
 						break
 					}
 					c.peerPool[topicobj][pubkeyid] = rw
-					nid, _ := discover.HexID("0x00")
-					p := p2p.NewPeer(nid, fmt.Sprintf("%v", addr), []p2p.Cap{})
+					p := p2p.NewPeer(enode.ID{}, fmt.Sprintf("%v", addr), []p2p.Cap{})
 					go proto.Run(p, c.peerPool[topicobj][pubkeyid])
 				}
 				go func() {
@@ -334,8 +333,7 @@ func (c *Client) AddPssPeer(pubkeyid string, addr []byte, spec *protocols.Spec) 
 		c.poolMu.Lock()
 		c.peerPool[topic][pubkeyid] = rw
 		c.poolMu.Unlock()
-		nid, _ := discover.HexID("0x00")
-		p := p2p.NewPeer(nid, fmt.Sprintf("%v", addr), []p2p.Cap{})
+		p := p2p.NewPeer(enode.ID{}, fmt.Sprintf("%v", addr), []p2p.Cap{})
 		go c.protos[topic].Run(p, c.peerPool[topic][pubkeyid])
 	}
 	return nil

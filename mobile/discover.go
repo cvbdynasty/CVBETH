@@ -22,7 +22,7 @@ package geth
 import (
 	"errors"
 
-	"github.com/cvbdynasty/cvbEth/p2p/discv5"
+	"github.com/cvbdynasty/CVBETH/p2p/discv5"
 )
 
 // Enode represents a host on the network.

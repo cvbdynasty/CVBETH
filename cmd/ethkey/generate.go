@@ -23,9 +23,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cvbdynasty/cvbEth/accounts/keystore"
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/accounts/keystore"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/crypto"
 	"github.com/pborman/uuid"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -90,7 +90,7 @@ If you want to encrypt an existing private key, it can be specified by setting
 		}
 
 		// Encrypt key with passphrase.
-		passphrase := getPassPhrase(ctx, true)
+		passphrase := promptPassphrase(true)
 		keyjson, err := keystore.EncryptKey(key, passphrase, keystore.StandardScryptN, keystore.StandardScryptP)
 		if err != nil {
 			utils.Fatalf("Error encrypting key: %v", err)

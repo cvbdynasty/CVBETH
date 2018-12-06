@@ -19,10 +19,10 @@ package metrics
 import (
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/log"
-	gethmetrics "github.com/cvbdynasty/cvbEth/metrics"
-	"github.com/cvbdynasty/cvbEth/metrics/influxdb"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	gethmetrics "github.com/cvbdynasty/CVBETH/metrics"
+	"github.com/cvbdynasty/CVBETH/metrics/influxdb"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -80,6 +80,9 @@ func Setup(ctx *cli.Context) {
 			password     = ctx.GlobalString(metricsInfluxDBPasswordFlag.Name)
 			hosttag      = ctx.GlobalString(metricsInfluxDBHostTagFlag.Name)
 		)
+
+		// Start system runtime metrics collection
+		go gethmetrics.CollectProcessMetrics(2 * time.Second)
 
 		if enableExport {
 			log.Info("Enabling swarm metrics export to InfluxDB")

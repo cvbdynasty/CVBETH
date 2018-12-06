@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // WaitMined waits for tx to be mined on the blockchain.

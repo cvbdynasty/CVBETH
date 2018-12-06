@@ -19,9 +19,9 @@ package types
 import (
 	"bytes"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/rlp"
-	"github.com/cvbdynasty/cvbEth/trie"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/rlp"
+	"github.com/cvbdynasty/CVBETH/trie"
 )
 
 type DerivableList interface {

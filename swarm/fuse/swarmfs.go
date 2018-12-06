@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/swarm/api"
+	"github.com/cvbdynasty/CVBETH/swarm/api"
 )
 
 const (
@@ -39,12 +39,12 @@ var (
 )
 
 type SwarmFS struct {
-	swarmApi     *api.Api
+	swarmApi     *api.API
 	activeMounts map[string]*MountInfo
 	swarmFsLock  *sync.RWMutex
 }
 
-func NewSwarmFS(api *api.Api) *SwarmFS {
+func NewSwarmFS(api *api.API) *SwarmFS {
 	swarmfsLock.Do(func() {
 		swarmfs = &SwarmFS{
 			swarmApi:     api,

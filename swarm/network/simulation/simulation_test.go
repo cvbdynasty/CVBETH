@@ -24,11 +24,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/rpc"
 	colorable "github.com/mattn/go-colorable"
 )
 
@@ -204,4 +204,17 @@ func (t *noopService) Start(server *p2p.Server) error {
 
 func (t *noopService) Stop() error {
 	return nil
+}
+
+// a helper function for most basic noop service
+// of a different type then noopService to test
+// multiple services on one node.
+func noopService2Func(ctx *adapters.ServiceContext, b *sync.Map) (node.Service, func(), error) {
+	return new(noopService2), nil, nil
+}
+
+// noopService2 is the service that does not do anything
+// but implements node.Service interface.
+type noopService2 struct {
+	noopService
 }

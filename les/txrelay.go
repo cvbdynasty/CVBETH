@@ -19,8 +19,8 @@ package les
 import (
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 type ltrInfo struct {

@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/mclock"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/mclock"
 )
 
 func TestTopicRadius(t *testing.T) {

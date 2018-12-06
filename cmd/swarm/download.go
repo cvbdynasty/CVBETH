@@ -21,12 +21,21 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/swarm/api"
-	swarm "github.com/cvbdynasty/cvbEth/swarm/api/client"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/swarm/api"
+	swarm "github.com/cvbdynasty/CVBETH/swarm/api/client"
 	"gopkg.in/urfave/cli.v1"
 )
+
+var downloadCommand = cli.Command{
+	Action:      download,
+	Name:        "down",
+	Flags:       []cli.Flag{SwarmRecursiveFlag, SwarmAccessPasswordFlag},
+	Usage:       "downloads a swarm manifest or a file inside a manifest",
+	ArgsUsage:   " <uri> [<dir>]",
+	Description: `Downloads a swarm bzz uri to the given dir. When no dir is provided, working directory is assumed. --recursive flag is expected when downloading a manifest with multiple entries.`,
+}
 
 func download(ctx *cli.Context) {
 	log.Debug("downloading content using swarm down")

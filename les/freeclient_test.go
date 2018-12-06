@@ -24,8 +24,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/mclock"
-	"github.com/cvbdynasty/cvbEth/ethdb"
+	"github.com/cvbdynasty/CVBETH/common/mclock"
+	"github.com/cvbdynasty/CVBETH/ethdb"
 )
 
 func TestFreeClientPoolL10C100(t *testing.T) {

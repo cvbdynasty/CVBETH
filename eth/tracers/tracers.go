@@ -21,7 +21,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/cvbdynasty/cvbEth/eth/tracers/internal/tracers"
+	"github.com/cvbdynasty/CVBETH/eth/tracers/internal/tracers"
 )
 
 // all contains all the built in JavaScript tracers by name.

@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	whisper "github.com/cvbdynasty/cvbEth/whisper/whisperv6"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	whisper "github.com/cvbdynasty/CVBETH/whisper/whisperv6"
 )
 
 const powRequirement = 0.00001
@@ -92,7 +92,10 @@ func TestMailServer(t *testing.T) {
 	shh = whisper.New(&whisper.DefaultConfig)
 	shh.RegisterServer(&server)
 
-	server.Init(shh, dir, password, powRequirement)
+	err = server.Init(shh, dir, password, powRequirement)
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer server.Close()
 
 	keyID, err = shh.AddSymKeyFromPassword(password)

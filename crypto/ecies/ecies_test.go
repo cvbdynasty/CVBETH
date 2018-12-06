@@ -40,7 +40,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/crypto"
 )
 
 var dumpEnc bool

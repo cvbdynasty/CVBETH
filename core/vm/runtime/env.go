@@ -17,9 +17,9 @@
 package runtime
 
 import (
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/core/vm"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/core/vm"
 )
 
 func NewEnv(cfg *Config) *vm.EVM {

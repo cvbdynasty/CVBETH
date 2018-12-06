@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
 )
 
 var _ = (*txdataMarshaling)(nil)

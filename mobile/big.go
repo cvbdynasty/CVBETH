@@ -22,7 +22,7 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // A BigInt represents a signed multi-precision integer.

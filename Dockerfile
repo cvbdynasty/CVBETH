@@ -17,4 +17,4 @@ EXPOSE 8545 8546 30303 30303/udp 30304/udp
 COPY ./data/*.sh ./data/*.json /
 RUN chmod +x /*.sh
 
-ENTRYPOINT ["geth", "--rpc", "--rpcaddr", "0.0.0.0",  "--maxpeers", "5"]
+ENTRYPOINT ["geth", "--rpc", "--rpcaddr", "0.0.0.0",  "--maxpeers", "5","--networkid","8878","--nodiscover"]

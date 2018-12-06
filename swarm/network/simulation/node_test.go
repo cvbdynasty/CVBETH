@@ -23,11 +23,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/swarm/network"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/swarm/network"
 )
 
 func TestUpDownNodeIDs(t *testing.T) {
@@ -75,7 +75,7 @@ func TestUpDownNodeIDs(t *testing.T) {
 	}
 }
 
-func equalNodeIDs(one, other []discover.NodeID) bool {
+func equalNodeIDs(one, other []enode.ID) bool {
 	if len(one) != len(other) {
 		return false
 	}
@@ -157,6 +157,41 @@ func TestAddNodeWithService(t *testing.T) {
 	}
 	if n.Service("noop2") != nil {
 		t.Error("service noop2 should not be found on node")
+	}
+}
+
+func TestAddNodeMultipleServices(t *testing.T) {
+	sim := New(map[string]ServiceFunc{
+		"noop1": noopServiceFunc,
+		"noop2": noopService2Func,
+	})
+	defer sim.Close()
+
+	id, err := sim.AddNode()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	n := sim.Net.GetNode(id).Node.(*adapters.SimNode)
+	if n.Service("noop1") == nil {
+		t.Error("service noop1 not found on node")
+	}
+	if n.Service("noop2") == nil {
+		t.Error("service noop2 not found on node")
+	}
+}
+
+func TestAddNodeDuplicateServiceError(t *testing.T) {
+	sim := New(map[string]ServiceFunc{
+		"noop1": noopServiceFunc,
+		"noop2": noopServiceFunc,
+	})
+	defer sim.Close()
+
+	wantErr := "duplicate service: *simulation.noopService"
+	_, err := sim.AddNode()
+	if err.Error() != wantErr {
+		t.Errorf("got error %q, want %q", err, wantErr)
 	}
 }
 
@@ -244,7 +279,7 @@ func TestUploadSnapshot(t *testing.T) {
 	log.Debug("Creating simulation")
 	s := New(map[string]ServiceFunc{
 		"bzz": func(ctx *adapters.ServiceContext, b *sync.Map) (node.Service, func(), error) {
-			addr := network.NewAddrFromNodeID(ctx.Config.ID)
+			addr := network.NewAddr(ctx.Config.Node())
 			hp := network.NewHiveParams()
 			hp.Discovery = false
 			config := &network.BzzConfig{

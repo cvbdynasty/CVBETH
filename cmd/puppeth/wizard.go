@@ -30,9 +30,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/log"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

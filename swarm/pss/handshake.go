@@ -25,13 +25,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/rlp"
-	"github.com/cvbdynasty/cvbEth/rpc"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/rlp"
+	"github.com/cvbdynasty/CVBETH/rpc"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
 )
 
 const (
@@ -486,7 +486,7 @@ func (api *HandshakeAPI) Handshake(pubkeyid string, topic Topic, sync bool, flus
 
 // Activate handshake functionality on a topic
 func (api *HandshakeAPI) AddHandshake(topic Topic) error {
-	api.ctrl.deregisterFuncs[topic] = api.ctrl.pss.Register(&topic, api.ctrl.handler)
+	api.ctrl.deregisterFuncs[topic] = api.ctrl.pss.Register(&topic, NewHandler(api.ctrl.handler))
 	return nil
 }
 

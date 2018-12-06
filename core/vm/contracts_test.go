@@ -21,7 +21,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 // precompiledTest defines the input/output pairs for precompiled contract tests.

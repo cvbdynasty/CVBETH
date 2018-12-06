@@ -21,9 +21,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/swarm/storage/encryption"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/encryption"
 
-	"github.com/cvbdynasty/cvbEth/common"
+	"github.com/cvbdynasty/CVBETH/common"
 )
 
 func TestHasherStore(t *testing.T) {

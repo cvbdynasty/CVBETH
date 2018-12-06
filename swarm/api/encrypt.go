@@ -20,8 +20,8 @@ import (
 	"encoding/binary"
 	"errors"
 
-	"github.com/cvbdynasty/cvbEth/crypto/sha3"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/encryption"
+	"github.com/cvbdynasty/CVBETH/crypto/sha3"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/encryption"
 )
 
 type RefEncryption struct {

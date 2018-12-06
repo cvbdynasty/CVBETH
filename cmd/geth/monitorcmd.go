@@ -25,9 +25,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/rpc"
 	"github.com/gizak/termui"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -185,12 +185,12 @@ func resolveMetric(metrics map[string]interface{}, pattern string, path string) 
 	parts := strings.SplitN(pattern, "/", 2)
 	if len(parts) > 1 {
 		for _, variation := range strings.Split(parts[0], ",") {
-			if submetrics, ok := metrics[variation].(map[string]interface{}); !ok {
+			submetrics, ok := metrics[variation].(map[string]interface{})
+			if !ok {
 				utils.Fatalf("Failed to retrieve system metrics: %s", path+variation)
 				return nil
-			} else {
-				results = append(results, resolveMetric(submetrics, parts[1], path+variation+"/")...)
 			}
+			results = append(results, resolveMetric(submetrics, parts[1], path+variation+"/")...)
 		}
 		return results
 	}

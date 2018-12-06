@@ -21,7 +21,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/event"
+	"github.com/cvbdynasty/CVBETH/event"
 )
 
 // Manager is an overarching account manager that can communicate with various

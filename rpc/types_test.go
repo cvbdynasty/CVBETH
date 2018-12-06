@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common/math"
+	"github.com/cvbdynasty/CVBETH/common/math"
 )
 
 func TestBlockNumberJSONUnmarshal(t *testing.T) {

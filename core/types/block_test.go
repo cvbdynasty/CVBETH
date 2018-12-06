@@ -23,8 +23,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 // from bcValidBlockTest.json, "SimpleTx"

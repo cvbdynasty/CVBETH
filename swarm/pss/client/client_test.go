@@ -27,18 +27,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/rpc"
-	"github.com/cvbdynasty/cvbEth/swarm/network"
-	"github.com/cvbdynasty/cvbEth/swarm/pss"
-	"github.com/cvbdynasty/cvbEth/swarm/state"
-	whisper "github.com/cvbdynasty/cvbEth/whisper/whisperv5"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/rpc"
+	"github.com/cvbdynasty/CVBETH/swarm/network"
+	"github.com/cvbdynasty/CVBETH/swarm/pss"
+	"github.com/cvbdynasty/CVBETH/swarm/state"
+	whisper "github.com/cvbdynasty/CVBETH/whisper/whisperv5"
 )
 
 type protoCtrl struct {
@@ -232,12 +232,11 @@ func setupNetwork(numnodes int) (clients []*rpc.Client, err error) {
 
 func newServices() adapters.Services {
 	stateStore := state.NewInmemoryStore()
-	kademlias := make(map[discover.NodeID]*network.Kademlia)
-	kademlia := func(id discover.NodeID) *network.Kademlia {
+	kademlias := make(map[enode.ID]*network.Kademlia)
+	kademlia := func(id enode.ID) *network.Kademlia {
 		if k, ok := kademlias[id]; ok {
 			return k
 		}
-		addr := network.NewAddrFromNodeID(id)
 		params := network.NewKadParams()
 		params.MinProxBinSize = 2
 		params.MaxBinSize = 3
@@ -245,7 +244,7 @@ func newServices() adapters.Services {
 		params.MaxRetries = 1000
 		params.RetryExponent = 2
 		params.RetryInterval = 1000000
-		kademlias[id] = network.NewKademlia(addr.Over(), params)
+		kademlias[id] = network.NewKademlia(id[:], params)
 		return kademlias[id]
 	}
 	return adapters.Services{
@@ -253,7 +252,13 @@ func newServices() adapters.Services {
 			ctxlocal, cancel := context.WithTimeout(context.Background(), time.Second)
 			defer cancel()
 			keys, err := wapi.NewKeyPair(ctxlocal)
+			if err != nil {
+				return nil, err
+			}
 			privkey, err := w.GetPrivateKey(keys)
+			if err != nil {
+				return nil, err
+			}
 			psparams := pss.NewPssParams().WithPrivateKey(privkey)
 			pskad := kademlia(ctx.Config.ID)
 			ps, err := pss.NewPss(pskad, psparams)
@@ -269,7 +274,7 @@ func newServices() adapters.Services {
 			return ps, nil
 		},
 		"bzz": func(ctx *adapters.ServiceContext) (node.Service, error) {
-			addr := network.NewAddrFromNodeID(ctx.Config.ID)
+			addr := network.NewAddr(ctx.Config.Node())
 			hp := network.NewHiveParams()
 			hp.Discovery = false
 			config := &network.BzzConfig{
@@ -287,10 +292,6 @@ type testStore struct {
 	sync.Mutex
 
 	values map[string][]byte
-}
-
-func newTestStore() *testStore {
-	return &testStore{values: make(map[string][]byte)}
 }
 
 func (t *testStore) Load(key string) ([]byte, error) {

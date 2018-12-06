@@ -19,8 +19,8 @@ package vm
 import (
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/math"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/math"
 )
 
 // calculates the memory size required for a step

@@ -26,7 +26,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/rlp"
+	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
 var (

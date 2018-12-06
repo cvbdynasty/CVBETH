@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/rlp"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
-	"github.com/cvbdynasty/cvbEth/swarm/pss"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/p2p"
+	"github.com/cvbdynasty/CVBETH/rlp"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/pss"
 )
 
 const (
@@ -113,7 +113,7 @@ func NewController(ps *pss.Pss) *Controller {
 		notifiers:     make(map[string]*notifier),
 		subscriptions: make(map[string]*subscription),
 	}
-	ctrl.pss.Register(&controlTopic, ctrl.Handler)
+	ctrl.pss.Register(&controlTopic, pss.NewHandler(ctrl.Handler))
 	return ctrl
 }
 
@@ -317,7 +317,7 @@ func (c *Controller) handleStartMsg(msg *Msg, keyid string) (err error) {
 		return err
 	}
 
-	// TODO this is set to zero-length byte pending decision on protocol for initial message, whether it should include message or not, and how to trigger the initial message so that current state of MRU is sent upon subscription
+	// TODO this is set to zero-length byte pending decision on protocol for initial message, whether it should include message or not, and how to trigger the initial message so that current state of Swarm feed is sent upon subscription
 	notify := []byte{}
 	replyMsg := NewMsg(MsgCodeNotifyWithKey, msg.namestring, make([]byte, len(notify)+symKeyLength))
 	copy(replyMsg.Payload, notify)
@@ -336,7 +336,7 @@ func (c *Controller) handleNotifyWithKeyMsg(msg *Msg) error {
 	// \TODO keep track of and add actual address
 	updaterAddr := pss.PssAddress([]byte{})
 	c.pss.SetSymmetricKey(symkey, topic, &updaterAddr, true)
-	c.pss.Register(&topic, c.Handler)
+	c.pss.Register(&topic, pss.NewHandler(c.Handler))
 	return c.subscriptions[msg.namestring].handler(msg.namestring, msg.Payload[:len(msg.Payload)-symKeyLength])
 }
 

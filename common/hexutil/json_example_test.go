@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
 )
 
 type MyType [5]byte

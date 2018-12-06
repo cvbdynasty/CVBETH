@@ -26,7 +26,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 const (

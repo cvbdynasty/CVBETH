@@ -19,7 +19,7 @@ package vm
 import (
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/params"
 )
 
 func makeStackFunc(pop, push int) stackValidationFunc {

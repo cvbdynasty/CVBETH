@@ -21,11 +21,11 @@ import (
 	"errors"
 	"math"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/consensus/ethash"
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/consensus/ethash"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/params"
 )
 
 // cppEthereumGenesisSpec represents the genesis specification format used by the
@@ -103,8 +103,8 @@ func newCppEthereumGenesisSpec(network string, genesis *core.Genesis) (*cppEther
 	spec.Params.ByzantiumForkBlock = (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64())
 	spec.Params.ConstantinopleForkBlock = (hexutil.Uint64)(math.MaxUint64)
 
-	spec.Params.NetworkID = (hexutil.Uint64)(genesis.Config.ChainId.Uint64())
-	spec.Params.ChainID = (hexutil.Uint64)(genesis.Config.ChainId.Uint64())
+	spec.Params.NetworkID = (hexutil.Uint64)(genesis.Config.ChainID.Uint64())
+	spec.Params.ChainID = (hexutil.Uint64)(genesis.Config.ChainID.Uint64())
 
 	spec.Params.MaximumExtraDataSize = (hexutil.Uint64)(params.MaximumExtraDataSize)
 	spec.Params.MinGasLimit = (hexutil.Uint64)(params.MinGasLimit)
@@ -284,7 +284,7 @@ func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []strin
 	spec.Params.MaximumExtraDataSize = (hexutil.Uint64)(params.MaximumExtraDataSize)
 	spec.Params.MinGasLimit = (hexutil.Uint64)(params.MinGasLimit)
 	spec.Params.GasLimitBoundDivisor = (hexutil.Uint64)(params.GasLimitBoundDivisor)
-	spec.Params.NetworkID = (hexutil.Uint64)(genesis.Config.ChainId.Uint64())
+	spec.Params.NetworkID = (hexutil.Uint64)(genesis.Config.ChainID.Uint64())
 	spec.Params.MaxCodeSize = params.MaxCodeSize
 	spec.Params.EIP155Transition = genesis.Config.EIP155Block.Uint64()
 	spec.Params.EIP98Transition = math.MaxUint64

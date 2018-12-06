@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // deployExplorer creates a new block explorer based on some user input.

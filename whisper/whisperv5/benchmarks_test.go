@@ -19,7 +19,7 @@ package whisperv5
 import (
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/crypto"
+	"github.com/cvbdynasty/CVBETH/crypto"
 )
 
 func BenchmarkDeriveKeyMaterial(b *testing.B) {

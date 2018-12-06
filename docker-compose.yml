@@ -1,0 +1,22 @@
+version: '3.3'
+
+   
+services:
+
+  node1:
+    image: enochi/cvb
+    command:  --rpc --rpcapi "eth,web3,txpool" --rpcaddr "0.0.0.0" --ws --wsaddr "0.0.0.0" --wsapi "eth,web3,admin,txpool" --wsorigins \"*\" --nodiscover
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "30303:30303"
+      - "30303:30303/udp"
+      - "30304:30304/udp"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data:/root/.ethereum/
+    environment:
+      - TZ=Asia/Shanghai
+    container_name: cvb
+    
+  

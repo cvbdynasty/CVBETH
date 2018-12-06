@@ -12,13 +12,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/crypto/ecies"
-	"github.com/cvbdynasty/cvbEth/crypto/sha3"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
-	"github.com/cvbdynasty/cvbEth/swarm/sctx"
-	"github.com/cvbdynasty/cvbEth/swarm/storage"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/crypto/ecies"
+	"github.com/cvbdynasty/CVBETH/crypto/sha3"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/sctx"
+	"github.com/cvbdynasty/CVBETH/swarm/storage"
 	"golang.org/x/crypto/scrypt"
 	cli "gopkg.in/urfave/cli.v1"
 )
@@ -458,6 +458,9 @@ func DoACT(ctx *cli.Context, privateKey *ecdsa.PrivateKey, salt []byte, grantees
 			return nil, nil, nil, err
 		}
 		sessionKey, err := NewSessionKeyPK(privateKey, granteePub, salt)
+		if err != nil {
+			return nil, nil, nil, err
+		}
 
 		hasher := sha3.NewKeccak256()
 		hasher.Write(append(sessionKey, 0))

@@ -19,7 +19,7 @@ package mem
 import (
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock/test"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock/test"
 )
 
 // TestGlobalStore is running test for a GlobalStore

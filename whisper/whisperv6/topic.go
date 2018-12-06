@@ -19,8 +19,8 @@
 package whisperv6
 
 import (
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
 )
 
 // TopicType represents a cryptographically secure, probabilistic partial

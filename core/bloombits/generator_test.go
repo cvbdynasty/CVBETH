@@ -21,7 +21,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 // Tests that batched bloom bits are correctly rotated from the input bloom

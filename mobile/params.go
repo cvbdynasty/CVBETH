@@ -21,9 +21,9 @@ package geth
 import (
 	"encoding/json"
 
-	"github.com/cvbdynasty/cvbEth/core"
-	"github.com/cvbdynasty/cvbEth/p2p/discv5"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/core"
+	"github.com/cvbdynasty/CVBETH/p2p/discv5"
+	"github.com/cvbdynasty/CVBETH/params"
 )
 
 // MainnetGenesis returns the JSON spec to use for the main Ethereum network. It

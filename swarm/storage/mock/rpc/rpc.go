@@ -26,10 +26,10 @@ package rpc
 import (
 	"fmt"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/rpc"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/rpc"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock"
 )
 
 // GlobalStore is rpc.Client that connects to a centralized mock store.
@@ -70,6 +70,12 @@ func (s *GlobalStore) Get(addr common.Address, key []byte) (data []byte, err err
 // Put calls a Put method to RPC server.
 func (s *GlobalStore) Put(addr common.Address, key []byte, data []byte) error {
 	err := s.client.Call(nil, "mockStore_put", addr, key, data)
+	return err
+}
+
+// Delete calls a Delete method to RPC server.
+func (s *GlobalStore) Delete(addr common.Address, key []byte) error {
+	err := s.client.Call(nil, "mockStore_delete", addr, key)
 	return err
 }
 

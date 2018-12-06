@@ -18,14 +18,15 @@ package core
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 
 	"math/big"
 
-	"github.com/cvbdynasty/cvbEth/accounts"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/common/hexutil"
-	"github.com/cvbdynasty/cvbEth/core/types"
+	"github.com/cvbdynasty/CVBETH/accounts"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/common/hexutil"
+	"github.com/cvbdynasty/CVBETH/core/types"
 )
 
 type Accounts []Account
@@ -60,6 +61,36 @@ type ValidationMessages struct {
 	Messages []ValidationInfo
 }
 
+const (
+	WARN = "WARNING"
+	CRIT = "CRITICAL"
+	INFO = "Info"
+)
+
+func (vs *ValidationMessages) crit(msg string) {
+	vs.Messages = append(vs.Messages, ValidationInfo{CRIT, msg})
+}
+func (vs *ValidationMessages) warn(msg string) {
+	vs.Messages = append(vs.Messages, ValidationInfo{WARN, msg})
+}
+func (vs *ValidationMessages) info(msg string) {
+	vs.Messages = append(vs.Messages, ValidationInfo{INFO, msg})
+}
+
+/// getWarnings returns an error with all messages of type WARN of above, or nil if no warnings were present
+func (v *ValidationMessages) getWarnings() error {
+	var messages []string
+	for _, msg := range v.Messages {
+		if msg.Typ == WARN || msg.Typ == CRIT {
+			messages = append(messages, msg.Message)
+		}
+	}
+	if len(messages) > 0 {
+		return fmt.Errorf("Validation failed: %s", strings.Join(messages, ","))
+	}
+	return nil
+}
+
 // SendTxArgs represents the arguments to submit a transaction
 type SendTxArgs struct {
 	From     common.MixedcaseAddress  `json:"from"`
@@ -73,8 +104,8 @@ type SendTxArgs struct {
 	Input *hexutil.Bytes `json:"input"`
 }
 
-func (t SendTxArgs) String() string {
-	s, err := json.Marshal(t)
+func (args SendTxArgs) String() string {
+	s, err := json.Marshal(args)
 	if err == nil {
 		return string(s)
 	}

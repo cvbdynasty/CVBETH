@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -38,6 +38,7 @@ func init() {
 	app.Commands = []cli.Command{
 		commandGenerate,
 		commandInspect,
+		commandChangePassphrase,
 		commandSignMessage,
 		commandVerifyMessage,
 	}

@@ -26,10 +26,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/cmd/internal/browser"
-	"github.com/cvbdynasty/cvbEth/params"
+	"github.com/cvbdynasty/CVBETH/cmd/internal/browser"
+	"github.com/cvbdynasty/CVBETH/params"
 
-	"github.com/cvbdynasty/cvbEth/cmd/utils"
+	"github.com/cvbdynasty/CVBETH/cmd/utils"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -41,7 +41,7 @@ var bugCommand = cli.Command{
 	Category:  "MISCELLANEOUS COMMANDS",
 }
 
-const issueUrl = "https://github.com/cvbdynasty/cvbEth/issues/new"
+const issueURL = "https://github.com/cvbdynasty/CVBETH/issues/new"
 
 // reportBug reports a bug by opening a new URL to the go-ethereum GH issue
 // tracker and setting default values as the issue body.
@@ -51,15 +51,15 @@ func reportBug(ctx *cli.Context) error {
 
 	fmt.Fprintln(&buff, "#### System information")
 	fmt.Fprintln(&buff)
-	fmt.Fprintln(&buff, "Version:", params.Version)
+	fmt.Fprintln(&buff, "Version:", params.VersionWithMeta)
 	fmt.Fprintln(&buff, "Go Version:", runtime.Version())
 	fmt.Fprintln(&buff, "OS:", runtime.GOOS)
 	printOSDetails(&buff)
 	fmt.Fprintln(&buff, header)
 
 	// open a new GH issue
-	if !browser.Open(issueUrl + "?body=" + url.QueryEscape(buff.String())) {
-		fmt.Printf("Please file a new issue at %s using this template:\n\n%s", issueUrl, buff.String())
+	if !browser.Open(issueURL + "?body=" + url.QueryEscape(buff.String())) {
+		fmt.Printf("Please file a new issue at %s using this template:\n\n%s", issueURL, buff.String())
 	}
 	return nil
 }

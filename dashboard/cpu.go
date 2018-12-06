@@ -21,7 +21,7 @@ package dashboard
 import (
 	"syscall"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 // getProcessCPUTime retrieves the process' CPU time since program startup.

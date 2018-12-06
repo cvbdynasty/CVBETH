@@ -27,13 +27,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p/discover"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/swarm/network"
-	"github.com/cvbdynasty/cvbEth/swarm/state"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p/enode"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/swarm/network"
+	"github.com/cvbdynasty/CVBETH/swarm/state"
 	colorable "github.com/mattn/go-colorable"
 )
 
@@ -64,26 +64,26 @@ func init() {
 
 type Simulation struct {
 	mtx    sync.Mutex
-	stores map[discover.NodeID]*state.InmemoryStore
+	stores map[enode.ID]state.Store
 }
 
 func NewSimulation() *Simulation {
 	return &Simulation{
-		stores: make(map[discover.NodeID]*state.InmemoryStore),
+		stores: make(map[enode.ID]state.Store),
 	}
 }
 
 func (s *Simulation) NewService(ctx *adapters.ServiceContext) (node.Service, error) {
-	id := ctx.Config.ID
+	node := ctx.Config.Node()
 	s.mtx.Lock()
-	store, ok := s.stores[id]
+	store, ok := s.stores[node.ID()]
 	if !ok {
 		store = state.NewInmemoryStore()
-		s.stores[id] = store
+		s.stores[node.ID()] = store
 	}
 	s.mtx.Unlock()
 
-	addr := network.NewAddrFromNodeID(id)
+	addr := network.NewAddr(node)
 
 	kp := network.NewKadParams()
 	kp.MinProxBinSize = 2

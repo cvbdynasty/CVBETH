@@ -21,9 +21,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/internal/ethapi"
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/rpc"
+	"github.com/cvbdynasty/CVBETH/internal/ethapi"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/rpc"
 )
 
 type StdIOUI struct {
@@ -110,4 +110,12 @@ func (ui *StdIOUI) OnSignerStartup(info StartupInfo) {
 	if err != nil {
 		log.Info("Error calling 'OnSignerStartup'", "exc", err.Error(), "info", info)
 	}
+}
+func (ui *StdIOUI) OnInputRequired(info UserInputRequest) (UserInputResponse, error) {
+	var result UserInputResponse
+	err := ui.dispatch("OnInputRequired", info, &result)
+	if err != nil {
+		log.Info("Error calling 'OnInputRequired'", "exc", err.Error(), "info", info)
+	}
+	return result, err
 }

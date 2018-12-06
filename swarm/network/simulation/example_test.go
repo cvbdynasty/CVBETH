@@ -22,21 +22,24 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
-	"github.com/cvbdynasty/cvbEth/node"
-	"github.com/cvbdynasty/cvbEth/p2p"
-	"github.com/cvbdynasty/cvbEth/p2p/simulations/adapters"
-	"github.com/cvbdynasty/cvbEth/swarm/network"
-	"github.com/cvbdynasty/cvbEth/swarm/network/simulation"
+	"github.com/cvbdynasty/CVBETH/log"
+	"github.com/cvbdynasty/CVBETH/node"
+	"github.com/cvbdynasty/CVBETH/p2p/simulations/adapters"
+	"github.com/cvbdynasty/CVBETH/swarm/network"
+	"github.com/cvbdynasty/CVBETH/swarm/network/simulation"
 )
 
 // Every node can have a Kademlia associated using the node bucket under
 // BucketKeyKademlia key. This allows to use WaitTillHealthy to block until
 // all nodes have the their Kadmlias healthy.
 func ExampleSimulation_WaitTillHealthy() {
+
+	log.Error("temporarily disabled as simulations.WaitTillHealthy cannot be trusted")
+	return
+
 	sim := simulation.New(map[string]simulation.ServiceFunc{
 		"bzz": func(ctx *adapters.ServiceContext, b *sync.Map) (node.Service, func(), error) {
-			addr := network.NewAddrFromNodeID(ctx.Config.ID)
+			addr := network.NewAddr(ctx.Config.Node())
 			hp := network.NewHiveParams()
 			hp.Discovery = false
 			config := &network.BzzConfig{
@@ -87,7 +90,7 @@ func ExampleSimulation_PeerEvents() {
 				log.Error("peer event", "err", e.Error)
 				continue
 			}
-			log.Info("peer event", "node", e.NodeID, "peer", e.Event.Peer, "msgcode", e.Event.MsgCode)
+			log.Info("peer event", "node", e.NodeID, "peer", e.PeerID, "type", e.Event.Type)
 		}
 	}()
 }
@@ -100,7 +103,7 @@ func ExampleSimulation_PeerEvents_disconnections() {
 	disconnections := sim.PeerEvents(
 		context.Background(),
 		sim.NodeIDs(),
-		simulation.NewPeerEventsFilter().Type(p2p.PeerEventTypeDrop),
+		simulation.NewPeerEventsFilter().Drop(),
 	)
 
 	go func() {
@@ -109,7 +112,7 @@ func ExampleSimulation_PeerEvents_disconnections() {
 				log.Error("peer drop", "err", d.Error)
 				continue
 			}
-			log.Warn("peer drop", "node", d.NodeID, "peer", d.Event.Peer)
+			log.Warn("peer drop", "node", d.NodeID, "peer", d.PeerID)
 		}
 	}()
 }
@@ -124,8 +127,8 @@ func ExampleSimulation_PeerEvents_multipleFilters() {
 		context.Background(),
 		sim.NodeIDs(),
 		// Watch when bzz messages 1 and 4 are received.
-		simulation.NewPeerEventsFilter().Type(p2p.PeerEventTypeMsgRecv).Protocol("bzz").MsgCode(1),
-		simulation.NewPeerEventsFilter().Type(p2p.PeerEventTypeMsgRecv).Protocol("bzz").MsgCode(4),
+		simulation.NewPeerEventsFilter().ReceivedMessages().Protocol("bzz").MsgCode(1),
+		simulation.NewPeerEventsFilter().ReceivedMessages().Protocol("bzz").MsgCode(4),
 	)
 
 	go func() {
@@ -134,7 +137,7 @@ func ExampleSimulation_PeerEvents_multipleFilters() {
 				log.Error("bzz message", "err", m.Error)
 				continue
 			}
-			log.Info("bzz message", "node", m.NodeID, "peer", m.Event.Peer)
+			log.Info("bzz message", "node", m.NodeID, "peer", m.PeerID)
 		}
 	}()
 }

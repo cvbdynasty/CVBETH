@@ -3,9 +3,9 @@ InstallDir "$InstDir"
 OutFile "${OUTPUTFILE}" # set through command line arguments
 
 # Links for "Add/Remove Programs"
-!define HELPURL "https://github.com/cvbdynasty/cvbEth/issues"
-!define UPDATEURL "https://github.com/cvbdynasty/cvbEth/releases"
-!define ABOUTURL "https://github.com/cvbdynasty/cvbEth#ethereum-go"
+!define HELPURL "https://github.com/cvbdynasty/CVBETH/issues"
+!define UPDATEURL "https://github.com/cvbdynasty/CVBETH/releases"
+!define ABOUTURL "https://github.com/cvbdynasty/CVBETH#ethereum-go"
 !define /date NOW "%Y%m%d"
 
 PageEx license

@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/crypto"
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/crypto"
+	"github.com/cvbdynasty/CVBETH/log"
 )
 
 type Filter struct {
@@ -220,7 +220,7 @@ func matchSingleTopic(topic TopicType, bt []byte) bool {
 		bt = bt[:TopicLength]
 	}
 
-	if len(bt) < TopicLength {
+	if len(bt) == 0 {
 		return false
 	}
 

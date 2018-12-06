@@ -23,7 +23,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cvbdynasty/cvbEth/swarm/storage/mock/test"
+	"github.com/cvbdynasty/CVBETH/swarm/storage/mock/test"
 )
 
 // TestDBStore is running a test.MockStore tests

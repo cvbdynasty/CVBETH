@@ -6,11 +6,11 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/cvbdynasty/cvbEth/metrics"
-	"github.com/cvbdynasty/cvbEth/swarm/api"
-	"github.com/cvbdynasty/cvbEth/swarm/log"
-	"github.com/cvbdynasty/cvbEth/swarm/sctx"
-	"github.com/cvbdynasty/cvbEth/swarm/spancontext"
+	"github.com/cvbdynasty/CVBETH/metrics"
+	"github.com/cvbdynasty/CVBETH/swarm/api"
+	"github.com/cvbdynasty/CVBETH/swarm/log"
+	"github.com/cvbdynasty/CVBETH/swarm/sctx"
+	"github.com/cvbdynasty/CVBETH/swarm/spancontext"
 	"github.com/pborman/uuid"
 )
 
@@ -50,7 +50,7 @@ func ParseURI(h http.Handler) http.Handler {
 		uri, err := api.Parse(strings.TrimLeft(r.URL.Path, "/"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			RespondError(w, r, fmt.Sprintf("invalid URI %q", r.URL.Path), http.StatusBadRequest)
+			respondError(w, r, fmt.Sprintf("invalid URI %q", r.URL.Path), http.StatusBadRequest)
 			return
 		}
 		if uri.Addr != "" && strings.HasPrefix(uri.Addr, "0x") {
@@ -75,7 +75,7 @@ func InitLoggingResponseWriter(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		writer := newLoggingResponseWriter(w)
 		h.ServeHTTP(writer, r)
-		log.Debug("request served", "ruid", GetRUID(r.Context()), "code", writer.statusCode)
+		log.Info("request served", "ruid", GetRUID(r.Context()), "code", writer.statusCode)
 	})
 }
 

@@ -26,7 +26,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/cvbdynasty/cvbEth/log"
+	"github.com/cvbdynasty/CVBETH/log"
 	"github.com/mohae/deepcopy"
 	"github.com/rjeczalik/notify"
 )

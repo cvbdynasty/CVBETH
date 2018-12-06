@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/cvbdynasty/cvbEth/cmd/evm/internal/compiler"
+	"github.com/cvbdynasty/CVBETH/cmd/evm/internal/compiler"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

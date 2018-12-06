@@ -7,12 +7,12 @@ import (
 	"math/big"
 	"strings"
 
-	ethereum "github.com/cvbdynasty/cvbEth"
-	"github.com/cvbdynasty/cvbEth/accounts/abi"
-	"github.com/cvbdynasty/cvbEth/accounts/abi/bind"
-	"github.com/cvbdynasty/cvbEth/common"
-	"github.com/cvbdynasty/cvbEth/core/types"
-	"github.com/cvbdynasty/cvbEth/event"
+	ethereum "github.com/cvbdynasty/CVBETH"
+	"github.com/cvbdynasty/CVBETH/accounts/abi"
+	"github.com/cvbdynasty/CVBETH/accounts/abi/bind"
+	"github.com/cvbdynasty/CVBETH/common"
+	"github.com/cvbdynasty/CVBETH/core/types"
+	"github.com/cvbdynasty/CVBETH/event"
 )
 
 // ChequebookABI is the input ABI used to generate the binding from.
