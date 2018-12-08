@@ -2,7 +2,7 @@ arr=("cvbsz"  "cvbsh"  "cvbbj" )
 for v in ${arr[@]}
 do
 	echo "depoly $v"
-	#scp docker-compose.yml zengym@$v:~/;
+	scp docker-compose.yml zengym@$v:~/;
 	#ssh zengym@$v mkdir ~/data/geth -p;
 	#scp data/static-nodes.json zengym@$v:~/data/geth/
 	ssh zengym@$v  " docker-compose down;docker pull enochi/cvb;"
