@@ -1,5 +1,5 @@
 # Build Geth in a stock Go builder container
-FROM golang:1.9-alpine as builder
+FROM golang:1.11-alpine as builder
 
 RUN apk add --no-cache make gcc musl-dev linux-headers
 
@@ -17,4 +17,4 @@ EXPOSE 8545 8546 30303 30303/udp 30304/udp
 COPY ./data/*.sh ./data/*.json /
 RUN chmod +x /*.sh
 
-ENTRYPOINT ["geth", "--rpc", "--rpcaddr", "0.0.0.0",  "--maxpeers", "5","--networkid","8878","--nodiscover"]
+ENTRYPOINT ["/entrypoint.sh","--networkid","8878","--nodiscover","--syncmode", "full","--maxpeers","12","--miner.gaslimit","100000000","--cache", "4096","--txpool.globalslots", "40960", "--txpool.globalqueue","102400"]
