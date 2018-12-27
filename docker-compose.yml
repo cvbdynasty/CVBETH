@@ -5,7 +5,11 @@ services:
 
   node:
     image: enochi/cvb
+<<<<<<< HEAD
     command:  --rpc --rpcaddr "0.0.0.0" --rpcport 8545  --ws --wsaddr "0.0.0.0" --wsport 18546 --wsapi "eth,web3,txpool" --wsorigins \"\*\"  
+=======
+    command:  --rpc --rpcapi "eth,web3,txpool" --rpcaddr "0.0.0.0" --ws --wsaddr "0.0.0.0" --wsapi "eth,web3,txpool" 
+>>>>>>> 54f37509e82cc0ca8d451bc707b6f626f42a736e
     ports:
       - "8545:8545"
       - "8546:18546"

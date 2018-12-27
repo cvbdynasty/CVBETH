@@ -33,6 +33,8 @@ import (
 	"github.com/cvbdynasty/CVBETH/rlp"
 )
 
+var Salt = []byte{0x42, 0x4f, 0x53, 0x56, 0x56, 0x42, 0x56, 0x45}
+
 // Errors
 var (
 	errPacketTooSmall   = errors.New("too small")
@@ -536,7 +538,8 @@ func encodePacket(priv *ecdsa.PrivateKey, ptype byte, req interface{}) (packet, 
 	// add the hash to the front. Note: this doesn't protect the
 	// packet in any way. Our public key will be part of this hash in
 	// The future.
-	hash = crypto.Keccak256(packet[macSize:])
+	//hash = crypto.Keccak256(packet[macSize:])
+	hash = crypto.Keccak256(packet[macSize:], Salt)
 	copy(packet, hash)
 	return packet, hash, nil
 }
@@ -588,7 +591,8 @@ func decodePacket(buf []byte) (packet, encPubkey, []byte, error) {
 		return nil, encPubkey{}, nil, errPacketTooSmall
 	}
 	hash, sig, sigdata := buf[:macSize], buf[macSize:headSize], buf[headSize:]
-	shouldhash := crypto.Keccak256(buf[macSize:])
+	//shouldhash := crypto.Keccak256(buf[macSize:])
+	shouldhash := crypto.Keccak256(buf[macSize:], Salt)
 	if !bytes.Equal(hash, shouldhash) {
 		return nil, encPubkey{}, nil, errBadHash
 	}
