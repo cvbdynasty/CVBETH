@@ -34,6 +34,7 @@ import (
 )
 
 var Salt = []byte{0x42, 0x4f, 0x53, 0x56, 0x56, 0x42, 0x56, 0x45}
+
 // Errors
 var (
 	errPacketTooSmall   = errors.New("too small")
